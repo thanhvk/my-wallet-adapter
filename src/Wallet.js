@@ -4,10 +4,10 @@ import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import {
     // getLedgerWallet,
     getPhantomWallet,
-    getSlopeWallet,
+    // getSlopeWallet,
     // getSolflareWallet,
     // getSolletExtensionWallet,
-    // getSolletWallet,
+    getSolletWallet,
     // getTorusWallet,
 } from '@solana/wallet-adapter-wallets';
 import {
@@ -28,16 +28,16 @@ const Wallet = () => {
     // Only the wallets you configure here will be compiled into your application
     const wallets = useMemo(() => [
         getPhantomWallet(),
-        getSlopeWallet(),
+        // getSlopeWallet(),
     //     getSolflareWallet(),
     //     getTorusWallet({
     //         options: { clientId: 'Get a client ID @ https://developer.tor.us' }
     //     }),
     //     getLedgerWallet(),
-    //     getSolletWallet({ network }),
+        getSolletWallet({ network }),
     //     getSolletExtensionWallet({ network }),
     // ], [network]);
-    ], []);
+    ], [network]);
 
     return (
         <ConnectionProvider endpoint={endpoint}>

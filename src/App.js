@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import './App.less';
 import Wallet from './Wallet';
+import { SendOneLamportToRandomAddress } from './SendLamports';
 
 const Layout = styled.div`
   max-width: 1200px;
@@ -21,7 +22,7 @@ function App() {
         <Wallet />
       </Header>
       <Main>
-        Main content in here!
+        <SendOneLamportToRandomAddress />
       </Main>
     </Layout>
   );

@@ -6,6 +6,7 @@ import {
     getSolletWallet,
 } from '@solana/wallet-adapter-wallets';
 import { clusterApiUrl } from '@solana/web3.js';
+import { GeneralProvider } from './general';
 
 const AppProviders = ({ children }) => {
     // Can be set to 'devnet', 'testnet', or 'mainnet-beta'
@@ -22,11 +23,13 @@ const AppProviders = ({ children }) => {
     ], [network]);
 
     return (
-        <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} autoConnect>
-                {children}
-            </WalletProvider>
-        </ConnectionProvider>
+        <GeneralProvider>
+            <ConnectionProvider endpoint={endpoint}>
+                <WalletProvider wallets={wallets} autoConnect>
+                    {children}
+                </WalletProvider>
+            </ConnectionProvider>
+        </GeneralProvider>
     );
 };
 

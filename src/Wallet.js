@@ -8,6 +8,9 @@ import {
 } from '@solana/wallet-adapter-ant-design';
 import { useWallet } from '@solana/wallet-adapter-react';
 
+import { AddressExternalLink } from './common';
+import { abbr } from './utils';
+
 const Wallet = () => {
     const { publicKey } = useWallet();
 
@@ -17,10 +20,12 @@ const Wallet = () => {
                 {!publicKey && <WalletMultiButton />}
                 {publicKey && (
                     <>
-                        <a target="_blank" rel="noreferrer" href={`https://solscan.io/account/${publicKey.toBase58()}`}>
-                            <WalletOutlined />
-                            {publicKey.toBase58().slice(0, 6) + "..." + publicKey.toBase58().slice(-6)}
-                        </a>
+                        <AddressExternalLink address={publicKey.toBase58()}>
+                            <Space>
+                                <WalletOutlined />
+                                {abbr(publicKey.toBase58())}
+                            </Space>
+                        </AddressExternalLink>
                         <WalletDisconnectButton />
                     </>
                 )}

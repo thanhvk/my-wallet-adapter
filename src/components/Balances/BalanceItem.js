@@ -98,10 +98,12 @@ const BalanceItem = ({ acc }) => {
               <div>mint: <AddressExternalLink type="token" address={token.address}>{token.address}</AddressExternalLink></div>
               <div>owner: <AddressExternalLink address={token.owner}>{token.owner}</AddressExternalLink></div>
               <div>uiAmount: {formatNumber(token.tokenAmount.uiAmount)}</div>
+              <div>decimals: {formatNumber(token.tokenAmount.decimals)}</div>
+              <div>amount: {formatNumber(token.tokenAmount.amount)}</div>
             </Col>
             <Col span={12}>
               <JsonWrapper>
-                <ReactJson src={acc} collapsed={true} />
+                <ReactJson src={acc.json} collapsed={true} />
               </JsonWrapper>
             </Col>
           </Row>

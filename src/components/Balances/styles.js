@@ -46,6 +46,25 @@ export const TokenDetails = styled.div`
 `
 
 // SendToken component
+export const SplPanel = styled.div`
+  margin-bottom: 7px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+`
+
+export const SplPanelHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  cursor: pointer;
+`
+
+export const SplPanelContent = styled.div`
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 10px 15px;
+`
+
 export const TokenOptionContent = styled.div`
   display: inline-flex;
   gap: 7px;

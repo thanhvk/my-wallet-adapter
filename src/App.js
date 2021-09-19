@@ -6,7 +6,8 @@ import Balances from './Balances';
 import { Divider } from 'antd';
 import { useWallet } from '@solana/wallet-adapter-react';
 
-import experiment2 from './assets/images/experiment_2.mp4'
+import solanaLogo from './assets/images/solana_no_radius.png'
+import videoBg from './assets/images/galaxy_2.mp4'
 
 const Layout = styled.div`
   max-width: 1200px;
@@ -22,8 +23,8 @@ const Header = styled.header`
   padding: 15px 0;
 `
 
-const MainBanner = styled.div`
-  height: 500px;
+const Banner = styled.div`
+  height: 700px;
   background-color: #f2f2f2;
   border-radius: 5px;
   position: relative;
@@ -31,11 +32,26 @@ const MainBanner = styled.div`
   overflow: hidden;
 `
 
-const MainTitle = styled.h1`
-  color: #fff;
+const BannerTitle = styled.h1`
   font-size: 32px;
+  font-family: 'Raleway', sans-serif;
+  color: #fff;
+  background: linear-gradient(to right,#7846de 0%,#1890ff 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
   margin: 10%;
   position: absolute;
+`
+
+const SolLogoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const SolLogo = styled.img`
+  width: ${({ size }) => size ? size : '40px'};
+  height: ${({ size }) => size ? size : '40px'};
+  margin-right: 8px;
 `
 
 const VideoStyled = styled.video`
@@ -52,15 +68,22 @@ function App() {
       </Header>
 
       {!publicKey && (
-        <MainBanner>
-          <MainTitle>Experiment with Wallet Adapter</MainTitle>
+        <Banner>
+          <BannerTitle>
+            <SolLogoWrapper>
+              <SolLogo src={solanaLogo} alt="solana" size="30px" />
+              <span>Solana Summer</span>
+            </SolLogoWrapper>
 
-          <VideoStyled autoPlay muted loop width="100%" height={500}>
-              <source src={experiment2} type="video/webm" />
-              <source src={experiment2} type="video/mp4" />
-              Sorry, your browser doesn't support embedded videos.
+            <span>Experiment with Wallet Adapter</span>
+          </BannerTitle>
+
+          <VideoStyled autoPlay muted loop width="100%" height={700}>
+            <source src={videoBg} type="video/webm" />
+            <source src={videoBg} type="video/mp4" />
+            Sorry, your browser doesn't support embedded videos.
           </VideoStyled>
-        </MainBanner>
+        </Banner>
       )}
 
       {publicKey && (

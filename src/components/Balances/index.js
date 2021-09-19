@@ -3,6 +3,8 @@ import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 
 import { TOKEN_PROGRAM_ID } from '../../constants';
 import BalanceItem from './BalanceItem';
+import { Divider } from 'antd';
+import SendToken from './SendToken';
 
 const parseAssociatedAccount = (acc) => {
   const account = {
@@ -23,6 +25,10 @@ const parseAssociatedAccount = (acc) => {
     json: acc,
   }
 }
+
+const BalanceList = ({ accounts }) => {
+  return accounts.map((acc, idx) => <BalanceItem key={idx} acc={acc} />);
+};
 
 const Balances = () => {
   const { connection } = useConnection();
@@ -51,8 +57,10 @@ const Balances = () => {
 
   return (
     <>
+      <SendToken accounts={associatedAccounts} />
+      <Divider />
       <div>{associatedAccounts.length} tokens</div>
-      {associatedAccounts.map((acc, idx) => <BalanceItem key={idx} acc={acc} />)}
+      <BalanceList accounts={associatedAccounts} />
     </>
   );
 };

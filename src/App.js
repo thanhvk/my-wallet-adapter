@@ -10,7 +10,7 @@ import Banner from './components/Banner';
 
 const Layout = styled.div`
   max-width: 1200px;
-  padding: 0 30px;
+  padding: 0 30px 50px;
   margin: auto;
 `
 

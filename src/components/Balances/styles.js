@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Divider, Typography } from 'antd';
 
-const { Text } = Typography
+const { Text } = Typography;
 
 export const TextSmall = styled(Text)`
   font-size: 12px;
@@ -11,6 +11,7 @@ export const DividerStyled = styled(Divider)`
   margin: 12px 0;
 `
 
+// BalanceItem component
 export const JsonWrapper = styled.div`
   overflow: auto;
 `;
@@ -42,4 +43,11 @@ export const TokenValue = styled.div`
 export const TokenDetails = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.06);
   padding: 10px 15px;
+`
+
+// SendToken component
+export const TokenOptionContent = styled.div`
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
 `

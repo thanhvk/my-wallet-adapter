@@ -34,8 +34,6 @@ const BalanceItem = ({ acc }) => {
   const priceInfo = useCoinGecko(tokenInfo.extensions && tokenInfo.extensions.coingeckoId)
   tokenInfo = { ...tokenInfo, ...priceInfo }
 
-  console.log(tokenInfo);
-
   return (
     <TokenWrapper>
       <TokenHeader onClick={() => setShowDetails(!showDetails)}>

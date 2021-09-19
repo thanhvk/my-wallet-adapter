@@ -26,29 +26,10 @@ import {
 
 const { Text } = Typography
 
-const parseAssociatedAccount = (acc) => {
-  const account = {
-    address: acc.pubkey.toBase58(), 
-    owner: acc.account.owner.toBase58(),
-    lamports: acc.account.lamports
-  }
-
-  const token = {
-    address: acc.account.data.parsed.info.mint,
-    owner: acc.account.data.parsed.info.owner,
-    tokenAmount: acc.account.data.parsed.info.tokenAmount,
-  }
-
-  return {
-    account,
-    token,
-  }
-}
-
 const BalanceItem = ({ acc }) => {
   const solanaTokens = useSolanaTokens();
   const [showDetails, setShowDetails] = useState(false);
-  const { account, token } = parseAssociatedAccount(acc);
+  const { account, token } = acc;
   let tokenInfo = solanaTokens[token.address] ? { ...solanaTokens[token.address], ...token } : token;
   const priceInfo = useCoinGecko(tokenInfo.extensions && tokenInfo.extensions.coingeckoId)
   tokenInfo = { ...tokenInfo, ...priceInfo }

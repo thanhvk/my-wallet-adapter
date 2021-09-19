@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import React, { useState } from 'react';
 import ReactJson from 'react-json-view';
-import styled from 'styled-components';
-import { Row, Col, Divider, Space, Typography } from 'antd';
+import { Row, Col, Space, Typography } from 'antd';
 import { 
   CaretRightOutlined,
   DollarCircleOutlined,
@@ -11,54 +9,22 @@ import {
 } from '@ant-design/icons';
 import BigNumber from 'bignumber.js';
 
-import { TOKEN_PROGRAM_ID } from '../constants';
-import { useSolanaTokens } from '../providers/general';
-import { abbr, toSol, formatNumber } from '../utils';
-import { AddressExternalLink } from './common';
-import { useCoinGecko } from '../hooks/coingecko';
+import { useSolanaTokens } from '../../providers/general';
+import { abbr, toSol, formatNumber } from '../../utils';
+import { AddressExternalLink } from '../common';
+import { useCoinGecko } from '../../hooks/coingecko';
+import {
+  TextSmall,
+  DividerStyled,
+  JsonWrapper,
+  TokenWrapper,
+  TokenHeader,
+  TokenInfo,
+  TokenValue,
+  TokenDetails,
+} from './styles';
 
 const { Text } = Typography
-
-const TextSmall = styled(Text)`
-  font-size: 12px;
-`
-
-const DividerStyled = styled(Divider)`
-  margin: 12px 0;
-`
-
-const JsonWrapper = styled.div`
-  overflow: auto;
-`;
-
-const TokenWrapper = styled.div`
-  margin-bottom: 7px;
-  border-radius: 5px;
-  background-color: #f2f2f2;
-`
-
-const TokenHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 15px;
-  cursor: pointer;
-`
-
-const TokenInfo = styled.div`
-  display: flex;
-  align-items: center;
-  min-width: 30%;
-`
-
-const TokenValue = styled.div`
-  min-width: 30%;
-`
-
-const TokenDetails = styled.div`
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  padding: 10px 15px;
-`
 
 const parseAssociatedAccount = (acc) => {
   const account = {
@@ -166,37 +132,4 @@ const BalanceItem = ({ acc }) => {
   )
 }
 
-const Balances = () => {
-  const { connection } = useConnection();
-  const { publicKey } = useWallet();
-  const [associatedAccounts, setAssociatedAccounts] = useState([]);
-
-  const getAssociatedAccounts = useCallback(async (pubkey) => {
-    if (!pubkey) return;
-
-    try {
-      const result = await connection.getParsedTokenAccountsByOwner(pubkey, { programId: TOKEN_PROGRAM_ID });
-      setAssociatedAccounts(result.value);
-    } catch (error) {
-      console.log(error);
-      setAssociatedAccounts([]);
-    }
-  }, [connection])
-
-  useEffect(() => {
-    if (!publicKey) return setAssociatedAccounts([]);
-
-    getAssociatedAccounts(publicKey);
-  }, [getAssociatedAccounts, publicKey])
-
-  if (!publicKey || (associatedAccounts.length === 0)) return null;
-
-  return (
-    <>
-      <div>{associatedAccounts.length} tokens</div>
-      {associatedAccounts.map((acc, idx) => <BalanceItem key={idx} acc={acc} />)}
-    </>
-  );
-};
-
-export default Balances;
+export default BalanceItem;

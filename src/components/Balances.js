@@ -11,11 +11,11 @@ import {
 } from '@ant-design/icons';
 import BigNumber from 'bignumber.js';
 
-import { TOKEN_PROGRAM_ID } from './constants';
-import { useSolanaTokens } from './general';
-import { abbr, toSol, formatNumber } from './utils';
+import { TOKEN_PROGRAM_ID } from '../constants';
+import { useSolanaTokens } from '../providers/general';
+import { abbr, toSol, formatNumber } from '../utils';
 import { AddressExternalLink } from './common';
-import { useCoinGecko } from './hooks/coingecko';
+import { useCoinGecko } from '../hooks/coingecko';
 
 const { Text } = Typography
 

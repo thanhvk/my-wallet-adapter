@@ -9,7 +9,7 @@ import {
 import { useWallet } from '@solana/wallet-adapter-react';
 
 import { AddressExternalLink } from './common';
-import { abbr } from './utils';
+import { abbr } from '../utils';
 
 const Wallet = () => {
     const { publicKey } = useWallet();

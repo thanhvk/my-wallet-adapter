@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import './App.less';
-import Wallet from './Wallet';
-import { SendOneLamportToRandomAddress } from './SendLamports';
-import Balances from './Balances';
+import Wallet from './components/Wallet';
+import { SendOneLamportToRandomAddress } from './components/SendLamports';
+import Balances from './components/Balances';
 import { Divider } from 'antd';
 import { useWallet } from '@solana/wallet-adapter-react';
 

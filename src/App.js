@@ -19,6 +19,7 @@ const Main = styled.main``
 const Header = styled.header`
   display: flex;
   justify-content: flex-end;
+  padding: 15px 0;
 `
 
 const MainBanner = styled.div`

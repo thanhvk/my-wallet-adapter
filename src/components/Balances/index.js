@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { SyncOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 
 import { TOKEN_PROGRAM_ID } from '../../constants';
 import BalanceItem from './BalanceItem';
 import { Divider } from 'antd';
 import SendToken from './SendToken';
+import { BalanceHeader } from './styles';
 
 const parseAssociatedAccount = (acc) => {
   const account = {
@@ -33,6 +36,7 @@ const BalanceList = ({ accounts }) => {
 const Balances = () => {
   const { connection } = useConnection();
   const { publicKey } = useWallet();
+  const [refresh, setRefresh] = useState(false);
   const [associatedAccounts, setAssociatedAccounts] = useState([]);
 
   const getAssociatedAccounts = useCallback(async (pubkey) => {
@@ -45,13 +49,15 @@ const Balances = () => {
       console.log(error);
       setAssociatedAccounts([]);
     }
+
+    setRefresh(false)
   }, [connection])
 
   useEffect(() => {
     if (!publicKey) return setAssociatedAccounts([]);
 
     getAssociatedAccounts(publicKey);
-  }, [getAssociatedAccounts, publicKey])
+  }, [getAssociatedAccounts, publicKey, refresh])
 
   if (!publicKey || (associatedAccounts.length === 0)) return null;
 
@@ -59,7 +65,10 @@ const Balances = () => {
     <>
       <SendToken accounts={associatedAccounts} />
       <Divider />
-      <div>{associatedAccounts.length} tokens</div>
+      <BalanceHeader>
+        <div>{associatedAccounts.length} tokens</div>
+        <Button size="large" onClick={() => setRefresh(true)}><SyncOutlined spin={refresh} /> Refresh</Button>
+      </BalanceHeader>
       <BalanceList accounts={associatedAccounts} />
     </>
   );

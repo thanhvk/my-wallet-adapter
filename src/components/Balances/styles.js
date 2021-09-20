@@ -11,6 +11,13 @@ export const DividerStyled = styled(Divider)`
   margin: 12px 0;
 `
 
+export const BalanceHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+`
+
 // BalanceItem component
 export const JsonWrapper = styled.div`
   overflow: auto;

@@ -1,5 +1,5 @@
 import React, { useMemo, createRef, useCallback, useState } from 'react';
-import { Form, Input, Button, Select, Space, Divider, Typography } from 'antd';
+import { Form, Input, Button, Select, Space, Divider, Typography, message } from 'antd';
 import { SendOutlined, DollarCircleOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { Transaction } from '@solana/web3.js';
 import { Token, TOKEN_PROGRAM_ID } from '@solana/spl-token';
@@ -70,10 +70,12 @@ const SendToken = ({ accounts }) =>  {
     
       const signature = await sendTransaction(transaction, connection);
       const result = await connection.confirmTransaction(signature, 'processed');
+      message.success(`Success send at slot ${result.context.slot}`);
     } catch (error) {
       console.log(error)
+      message.error('Error');
     }
-  })
+  }, [connection, publicKey, sendTransaction])
 
   const [showSplTokenForm, setShowSplTokenForm] = useState(false)
 

@@ -5,6 +5,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.4",
     "@craco/craco": "^6.3.0",
+    "@project-serum/serum": "^0.13.59",
     "@solana/spl-token": "^0.1.8",
     "@solana/wallet-adapter-ant-design": "^0.7.0",
     "@solana/wallet-adapter-base": "^0.6.0",

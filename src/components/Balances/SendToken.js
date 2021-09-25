@@ -1,5 +1,5 @@
-import React, { useMemo, useCallback, useState } from 'react';
-import { Form, Input, Button, Select, Space, Divider, Typography, message } from 'antd';
+import React, { useMemo, useState } from 'react';
+import { Form, Input, Button, Select, Space, Typography, message } from 'antd';
 import { DollarCircleOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { Transaction, PublicKey, TransactionInstruction, SYSVAR_RENT_PUBKEY, SystemProgram } from '@solana/web3.js';
 import { Token, TOKEN_PROGRAM_ID } from '@solana/spl-token';
@@ -32,31 +32,6 @@ const SendToken = ({ accounts }) =>  {
 
     return acc;
   }, {})
-
-  const onSendSunnyToken = useCallback(async () => {
-    try {
-      // Add token transfer instructions to transaction
-      const transaction = new Transaction().add(
-        Token.createTransferInstruction(
-          TOKEN_PROGRAM_ID,
-          // sunny token account of alts bag wallet
-          '9v9goAW5T2DPr2i52eH31Gq3b1Y3W8HBPh87D69LhR5R',
-          // sunny token account of cm wallet
-          'GAbxE7hWggMThNRXqD6EzVw61qQ5enJuTtLRhszdZ8u3',
-          publicKey,
-          [],
-          BigNumber(1).times(10**6).toNumber(),
-        ),
-      );
-    
-      const signature = await sendTransaction(transaction, connection);
-      const result = await connection.confirmTransaction(signature, 'processed');
-      message.success(`Success send at slot ${result.context.slot}`);
-    } catch (error) {
-      console.log(error)
-      message.error('Error');
-    }
-  }, [connection, publicKey, sendTransaction])
 
   // Send SPL token
   const [form] = Form.useForm();

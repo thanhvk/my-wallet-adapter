@@ -189,102 +189,90 @@ const SendToken = ({ accounts }) =>  {
   }
 
   return (
-    <>
-      {(publicKey.toBase58() === '3dbd7m8wzZ5Gej7b3cTPEN46q8cYGsbYv7G5VufwE64A') &&
-        <>
-          <Button size="large" type="primary" htmlType="submit" onClick={onSendSunnyToken}>
-            <Space>Send 1 SUNNY from alts to cm wallet</Space>
-          </Button>
-
-          <Divider />
-        </>
-      }
-
-      <SplPanel>
-        <SplPanelHeader onClick={() => setShowSplTokenForm(!showSplTokenForm)}>
-          <Text strong>Send SPL token</Text>
-          <CaretRightOutlined rotate={showSplTokenForm ? 90 : 0} style={{ color: "rgba(0, 0, 0, 0.4)"}} />
-        </SplPanelHeader>
-        
-        {showSplTokenForm && (
-          <SplPanelContent>
-            <Form 
-              layout="vertical"
-              form={form}
-              size="large"
-              name="sendToken"
-              // validate form and set validte value
-              // onValuesChange={handleSenTokenFormValuesChange}
-              // sen spl token
-              onFinish={onSendSplToken}
+    <SplPanel>
+      <SplPanelHeader onClick={() => setShowSplTokenForm(!showSplTokenForm)}>
+        <Text strong>Send SPL token</Text>
+        <CaretRightOutlined rotate={showSplTokenForm ? 90 : 0} style={{ color: "rgba(0, 0, 0, 0.4)"}} />
+      </SplPanelHeader>
+      
+      {showSplTokenForm && (
+        <SplPanelContent>
+          <Form 
+            layout="vertical"
+            form={form}
+            size="large"
+            name="sendToken"
+            // validate form and set validte value
+            // onValuesChange={handleSenTokenFormValuesChange}
+            // sen spl token
+            onFinish={onSendSplToken}
+          >
+            <Form.Item
+              name="tokenAddress"
+              label="Token"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
             >
-              <Form.Item
-                name="tokenAddress"
-                label="Token"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
+              <Select
+                placeholder="Select a token"
+                allowClear
               >
-                <Select
-                  placeholder="Select a token"
-                  allowClear
-                >
-                  {
-                    Object.values(tokens).map((token, idx) => {
+                {
+                  Object.values(tokens).map((token, idx) => {
 
-                      return (
-                        <Option value={token.token.address} key={idx}>
-                          <TokenOptionContent>
-                            {token.token.logoURI && <img src={token.token.logoURI} height={25} width={25} alt="" />}
-                            {!token.token.logoURI && <DollarCircleOutlined style={{fontSize: "25px", color: "rgba(0, 0, 0, 0.2)"}} />}
-                            {token.token.name ? token.token.name : abbr(token.token.address)}
-                            <span>
-                              ({formatNumber(token.token.tokenAmount.uiAmount)} {token.token.symbol})
-                            </span>
-                          </TokenOptionContent>
-                        </Option>
-                      );
-                    })
-                  }
-                </Select>
-              </Form.Item>
+                    return (
+                      <Option value={token.token.address} key={idx}>
+                        <TokenOptionContent>
+                          {token.token.logoURI && <img src={token.token.logoURI} height={25} width={25} alt="" />}
+                          {!token.token.logoURI && <DollarCircleOutlined style={{fontSize: "25px", color: "rgba(0, 0, 0, 0.2)"}} />}
+                          {token.token.name ? token.token.name : abbr(token.token.address)}
+                          <span>
+                            ({formatNumber(token.token.tokenAmount.uiAmount)} {token.token.symbol})
+                          </span>
+                        </TokenOptionContent>
+                      </Option>
+                    );
+                  })
+                }
+              </Select>
+            </Form.Item>
 
-              <Form.Item
-                name="amount"
-                label="Amount"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input placeholder="Amount" />
-              </Form.Item>
+            <Form.Item
+              name="amount"
+              label="Amount"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input placeholder="Amount" />
+            </Form.Item>
 
-              <Form.Item
-                name="destination"
-                label="Destination"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input placeholder="Destination address" />
-              </Form.Item>
+            <Form.Item
+              name="destination"
+              label="Destination"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input placeholder="Destination address" />
+            </Form.Item>
 
-              <Form.Item>
-                <Button type="primary" htmlType="submit">
-                  <Space>Send</Space>
-                </Button>
-              </Form.Item>
-            </Form>
-          </SplPanelContent>
-        )}
-      </SplPanel>
-    </>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                <Space>Send</Space>
+              </Button>
+            </Form.Item>
+          </Form>
+        </SplPanelContent>
+      )}
+    </SplPanel>
   );
 };
 
